@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="公司有bc3可用，如何将bc3配置成git difftool，使得用git difftool可以通过bc3的选项卡同时打开两个版本所有不同文件。以下是我的配置过程。在~/.gitconfig中配置如下
 123456[diff]	tool = jellybc3[difftool]	prompt = false[difftool &quot;jellybc3&quot;]	cmd = \&quot;/cygdrive/c/prog">
-<meta property="og:updated_time" content="2015-12-29T16:43:15.000Z">
+<meta property="og:updated_time" content="2015-12-29T16:52:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cygwin下配置git-difftool">
 <meta name="twitter:description" content="公司有bc3可用，如何将bc3配置成git difftool，使得用git difftool可以通过bc3的选项卡同时打开两个版本所有不同文件。以下是我的配置过程。在~/.gitconfig中配置如下
@@ -95,14 +95,19 @@
 </ol>
 <p>解决方法：<br>使用脚本解决，cmd可以换成自己的脚本，这样就能自定义控制比较过程，处理路径问题了。<br>将上文配置的cmd一行改为：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd = git-diff-tool.sh <span class="command">\"</span>LOCAL<span class="command">\"</span>  <span class="command">\"</span>REMOTE<span class="command">\"</span></span><br></pre></td></tr></table></figure></p>
 <p>脚本代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/bash</span></span><br><span class="line"><span class="comment">#this script is a hook for git difftool, the configuration is in the ~/.gitconfig</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span> : the local path"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$2</span> : the remote path"</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"/git_tmp/old/`basename <span class="variable">$1</span>`"</span></span><br><span class="line">new_path=<span class="string">"/git_tmp/new/`basename <span class="variable">$2</span>`"</span></span><br><span class="line"></span><br><span class="line">cp -vrf <span class="variable">$1</span> <span class="variable">$old_path</span></span><br><span class="line">cp -vrf <span class="variable">$2</span> <span class="variable">$new_path</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"d:/program/cygwin0826<span class="variable">$old_path</span>"</span></span><br><span class="line">new_path=<span class="string">"d:/program/cygwin0826<span class="variable">$new_path</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="string">"/cygdrive/C/Program Files/Beyond Compare 3/BCompare.exe"</span> <span class="string">"<span class="variable">$old_path</span>"</span> <span class="string">"<span class="variable">$new_path</span>"</span> &amp;</span><br></pre></td></tr></table></figure></p>
-<p>脚本将生成的临时文件拷贝至git_tmp目录，临时文件在git调用下一次cmd前被git删除但是已被拷贝至新文件夹，随后开始用bc3进行diff比较，这样每一对文件都能出现在bc3的选项卡中，就能看到两个版本所有文件的不同了。<br>副作用就是git_tmp文件夹文件会越来越多，需要手动清除，如果git difftool能像awk一样能设置开始动作和结束动作就好了，但是官方文档中没有查到这个功能。<br>当然不要忘记bc3要设置成选项卡模式，脚本git-diff-tool.sh要设环境变量或者加绝对路径。</p>
+<p>脚本将生成的临时文件拷贝至git_tmp目录，临时文件在git调用下一次cmd前被git删除但是已被拷贝至新文件夹，随后开始用bc3进行diff比较，这样每一对文件都能出现在bc3的选项卡中，就能看到两个版本所有文件的不同了。</p>
+<p>副作用就是git_tmp文件夹文件会越来越多，需要手动清除，如果git difftool能像awk一样能设置开始动作和结束动作就好了，但是官方文档中没有查到这个功能。</p>
+<p>当然不要忘记bc3要设置成选项卡模式，脚本git-diff-tool.sh要设环境变量或者加绝对路径。</p>
+<p>git官方文档地址：<br><a href="http://www.kernel.org/pub/software/scm/git/docs/git-difftool.html" target="_blank" rel="external">http://www.kernel.org/pub/software/scm/git/docs/git-difftool.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/25/git-difftool/" data-id="ciirmhped0000k8tjwag2oqh9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/25/git-difftool/" data-id="ciirmrlza0000lttjr26g7md6" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
     </footer>
   </div>
   
@@ -127,8 +132,22 @@
     
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/git/" style="font-size: 10px;">git</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
