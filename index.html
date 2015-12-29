@@ -83,7 +83,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="u5728cygwin_u4E0B_u5BF9git_difftool__u914D_u7F6E_u6210beyond_compare"><a href="#u5728cygwin_u4E0B_u5BF9git_difftool__u914D_u7F6E_u6210beyond_compare" class="headerlink" title="在cygwin下对git difftool 配置成beyond compare"></a>在cygwin下对git difftool 配置成beyond compare</h3><h4 id="git_u914D_u7F6E_u6587_u4EF6"><a href="#git_u914D_u7F6E_u6587_u4EF6" class="headerlink" title="git配置文件"></a>git配置文件</h4><p>在~/.gitconfig中配置如下</p>
+        <p>公司有bc3可用，如何将bc3配置成git difftool，使得用git difftool可以通过bc3的选项卡同时打开两个版本所有不同文件。以下是我的配置过程。<br>在~/.gitconfig中配置如下</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[diff]</span><br><span class="line">	tool = jellybc3</span><br><span class="line">[difftool]</span><br><span class="line">	prompt = <span class="literal">false</span></span><br><span class="line">[difftool <span class="string">"jellybc3"</span>]</span><br><span class="line">	cmd = <span class="string">\"/cygdrive/c/program</span> files/beyond compare <span class="number">3</span>/bcomp.exe<span class="string">\"</span> <span class="string">\"$(cygpath</span> -w $LOCAL)<span class="string">\"</span> <span class="string">\"$REMOTE\"</span></span><br></pre></td></tr></table></figure>
 <p>以上配置网上都能找到，最后一行命令是打开bc3并传递两个待比较文件的地址。</p>
 <p>实际使用过程中有如下问题：</p>
@@ -93,11 +93,12 @@
 </ol>
 <p>解决方法：<br>使用脚本解决，cmd可以换成自己的脚本，这样就能自定义控制比较过程，处理路径问题了。<br>将上文配置的cmd一行改为：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd = git-diff-tool.sh <span class="command">\"</span>LOCAL<span class="command">\"</span>  <span class="command">\"</span>REMOTE<span class="command">\"</span></span><br></pre></td></tr></table></figure></p>
 <p>脚本代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/bash</span></span><br><span class="line"><span class="comment">#this script is a hook for git difftool, the configuration is in the ~/.gitconfig</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span> : the local path"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$2</span> : the remote path"</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"/git_tmp/old/`basename <span class="variable">$1</span>`"</span></span><br><span class="line">new_path=<span class="string">"/git_tmp/new/`basename <span class="variable">$2</span>`"</span></span><br><span class="line"></span><br><span class="line">cp -vrf <span class="variable">$1</span> <span class="variable">$old_path</span></span><br><span class="line">cp -vrf <span class="variable">$2</span> <span class="variable">$new_path</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"d:/program/cygwin0826<span class="variable">$old_path</span>"</span></span><br><span class="line">new_path=<span class="string">"d:/program/cygwin0826<span class="variable">$new_path</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="string">"/cygdrive/C/Program Files/Beyond Compare 3/BCompare.exe"</span> <span class="string">"<span class="variable">$old_path</span>"</span> <span class="string">"<span class="variable">$new_path</span>"</span> &amp;</span><br></pre></td></tr></table></figure></p>
+<p>脚本将生成的临时文件拷贝至git_tmp目录，临时文件在git调用下一次cmd前被git删除但是已被拷贝至新文件夹，随后开始用bc3进行diff比较，这样每一对文件都能出现在bc3的选项卡中，就能看到两个版本所有文件的不同了。<br>副作用就是git_tmp文件夹文件会越来越多，需要手动清除，如果git difftool能像awk一样能设置开始动作和结束动作就好了，但是官方文档中没有查到这个功能。<br>当然不要忘记bc3要设置成选项卡模式，脚本git-diff-tool.sh要设环境变量或者加绝对路径。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/25/git-difftool/" data-id="ciirlsnjt0000h1tjfj6av9x3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/25/git-difftool/" data-id="ciirmhped0000k8tjwag2oqh9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -133,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/25/test-md/" data-id="ciirlsnka0001h1tjkue95lsv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/25/test-md/" data-id="ciirmhpfj0001k8tj7n4qz9zh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/24/hello-world/" data-id="ciirlsnkc0002h1tjdgk51pkv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/24/hello-world/" data-id="ciirmhpfm0002k8tjqzjlrf8u" class="article-share-link">Share</a>
       
       
     </footer>
