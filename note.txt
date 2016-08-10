@@ -1,1 +1,3 @@
 http://patorjk.com/software/taag  ascii char generate
+http://stackoverflow.com/questions/5653114/display-image-in-qt-to-fit-label-size
+http://stackoverflow.com/questions/14107144/how-do-i-make-an-image-resize-to-scale-in-qt
