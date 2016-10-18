@@ -5,15 +5,43 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="联系方式（HR会打印你的简历，用于在面试的时候联系，所以联系方式放到最上边会比较方便）
+
+手机：135** （如果是外地手机，可注明。如经常关机，要写上最优联系时间）
+Email：goodman@gmail.com （虽然我觉得QQ邮箱无所谓，不过有些技术人员比较反感，建议用G）
+QQ/微信号：6*（提供一个通过网络可以联系到你的方式）
+
+
+个人信息
+胶布帝/男/1990 
+本科/萌鹿大学计算机系">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/04/28/c/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="联系方式（HR会打印你的简历，用于在面试的时候联系，所以联系方式放到最上边会比较方便）
+
+手机：135** （如果是外地手机，可注明。如经常关机，要写上最优联系时间）
+Email：goodman@gmail.com （虽然我觉得QQ邮箱无所谓，不过有些技术人员比较反感，建议用G）
+QQ/微信号：6*（提供一个通过网络可以联系到你的方式）
+
+
+个人信息
+胶布帝/男/1990 
+本科/萌鹿大学计算机系">
+<meta property="og:updated_time" content="2016-04-27T16:20:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:description" content="联系方式（HR会打印你的简历，用于在面试的时候联系，所以联系方式放到最上边会比较方便）
+
+手机：135** （如果是外地手机，可注明。如经常关机，要写上最优联系时间）
+Email：goodman@gmail.com （虽然我觉得QQ邮箱无所谓，不过有些技术人员比较反感，建议用G）
+QQ/微信号：6*（提供一个通过网络可以联系到你的方式）
+
+
+个人信息
+胶布帝/男/1990 
+本科/萌鹿大学计算机系">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +87,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-c" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-c" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/28/c/" class="article-date">
   <time datetime="2016-04-27T16:20:38.000Z" itemprop="datePublished">2016-04-28</time>
@@ -238,143 +264,38 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-git-difftool" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/25/git-difftool/" class="article-date">
-  <time datetime="2015-12-25T14:39:05.000Z" itemprop="datePublished">2015-12-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/25/git-difftool/">cygwin下配置git-difftool</a>
-    </h1>
+    <a href="/2015/12/25/git-difftool/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cygwin下配置git-difftool</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>公司有bc3可用，如何将bc3配置成git difftool，使得用git difftool可以通过bc3的选项卡同时打开两个版本所有不同文件。以下是我的配置过程。<br>在~/.gitconfig中配置如下</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[diff]</span><br><span class="line">	tool = jellybc3</span><br><span class="line">[difftool]</span><br><span class="line">	prompt = <span class="literal">false</span></span><br><span class="line">[difftool <span class="string">"jellybc3"</span>]</span><br><span class="line">	cmd = <span class="string">\"/cygdrive/c/program</span> files/beyond compare <span class="number">3</span>/bcomp.exe<span class="string">\"</span> <span class="string">\"$(cygpath</span> -w $LOCAL)<span class="string">\"</span> <span class="string">\"$REMOTE\"</span></span><br></pre></td></tr></table></figure>
-<p>以上配置网上都能找到，最后一行命令是打开bc3并传递两个待比较文件的地址。</p>
-<p>实际使用过程中有如下问题：</p>
-<ol>
-<li>路径出错，cygpath -w $LOCAL 并未执行</li>
-<li>执行git difftool命令过程是比较两个git版本库异同，git会对每一对待比较文件调用一次cmd命令，将每一对待比较文件的地址$LOCAL和$REMOTE传递给bc3,命令执行完毕后删除这两个临时文件（如果两个都是临时文件的话），再进行下一次的cmd调用。这样会造成比较时无法用bc3观看两个版本库所有文件的不同，而只能一对对文件看，看完一个关闭这个才能看下个。</li>
-</ol>
-<p>解决方法：<br>使用脚本解决，cmd可以换成自己的脚本，这样就能自定义控制比较过程，处理路径问题了。<br>将上文配置的cmd一行改为：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd = git-diff-tool.sh <span class="command">\"</span>LOCAL<span class="command">\"</span>  <span class="command">\"</span>REMOTE<span class="command">\"</span></span><br></pre></td></tr></table></figure></p>
-<p>脚本代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/bash</span></span><br><span class="line"><span class="comment">#this script is a hook for git difftool, the configuration is in the ~/.gitconfig</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span> : the local path"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$2</span> : the remote path"</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"/git_tmp/old/`basename <span class="variable">$1</span>`"</span></span><br><span class="line">new_path=<span class="string">"/git_tmp/new/`basename <span class="variable">$2</span>`"</span></span><br><span class="line"></span><br><span class="line">cp -vrf <span class="variable">$1</span> <span class="variable">$old_path</span></span><br><span class="line">cp -vrf <span class="variable">$2</span> <span class="variable">$new_path</span></span><br><span class="line"></span><br><span class="line">old_path=<span class="string">"d:/program/cygwin0826<span class="variable">$old_path</span>"</span></span><br><span class="line">new_path=<span class="string">"d:/program/cygwin0826<span class="variable">$new_path</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="string">"/cygdrive/C/Program Files/Beyond Compare 3/BCompare.exe"</span> <span class="string">"<span class="variable">$old_path</span>"</span> <span class="string">"<span class="variable">$new_path</span>"</span> &amp;</span><br></pre></td></tr></table></figure></p>
-<p>脚本将生成的临时文件拷贝至git_tmp目录，临时文件在git调用下一次cmd前被git删除但是已被拷贝至新文件夹，随后开始用bc3进行diff比较，这样每一对文件都能出现在bc3的选项卡中，就能看到两个版本所有文件的不同了。</p>
-<p>副作用就是git_tmp文件夹文件会越来越多，需要手动清除，如果git difftool能像awk一样能设置开始动作和结束动作就好了，但是官方文档中没有查到这个功能。</p>
-<p>当然不要忘记bc3要设置成选项卡模式，脚本git-diff-tool.sh要设环境变量或者加绝对路径。</p>
-<p>git官方文档地址：<br><a href="http://www.kernel.org/pub/software/scm/git/docs/git-difftool.html" target="_blank" rel="external">http://www.kernel.org/pub/software/scm/git/docs/git-difftool.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/25/git-difftool/" data-id="ciufhsfve0003q3tj6i2h274d" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-test-md" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/25/test-md/" class="article-date">
-  <time datetime="2015-12-24T16:39:51.000Z" itemprop="datePublished">2015-12-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/25/test-md/">测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="u4E00_HLS_u5F00_u53D1"><a href="#u4E00_HLS_u5F00_u53D1" class="headerlink" title="一 HLS开发"></a>一 HLS开发</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/25/test-md/" data-id="ciufhsfv70001q3tjrtus6q5w" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/24/hello-world/" class="article-date">
-  <time datetime="2015-12-24T15:57:55.000Z" itemprop="datePublished">2015-12-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/24/hello-world/" data-id="ciufhsfvb0002q3tjsb0xec0q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-c" data-title="" data-url="http://yoursite.com/2016/04/28/c/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'huheng'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
   
 </section>
         
