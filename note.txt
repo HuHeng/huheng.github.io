@@ -5,3 +5,28 @@ http://stackoverflow.com/questions/8211982/qt-resizing-a-qlabel-containing-a-qpi
 
 # a website learn data struct
 http://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+加群
+	人事会告知
+	
+加有道 2个协作群：
+	http://163.fm/9EJMGSj
+	http://163.fm/I70vFeL
+
+加git.mudu.tv
+	人事开好邮箱后，告知宁克凡开通
+	
+加文档库
+	http://mudutv.torchpad.com/
+	注册后将邮箱告知宁克凡
+	
+配置开发环境
+	有道协作，雅顾开发团队中配置文档：如何构建web开发环境
+
+加 https://trello.com/b/5BZqC5Da/develop 任务流
+
+翻墙代理
+http://note.youdao.com/yws/public/redirect/share?id=392881927ef9c16bd6b97cc880e65872&type=false
+翟四岚  13:31:49
+加内部文档库
+https://torchpad.com/workspace/wikis/mudutv/pages
+注册一个，把邮箱告诉宁克凡
